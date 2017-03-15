@@ -9,63 +9,78 @@
 				width:32px;
 			}
 		</style>
-		<script>
-			var x = 5, k = 1;
-		
-			function  sum (a, b) {
-				return a + b;
-			}
-			function  divide (a, b) {
-				return a / b;
-			}
-			function  minus (a, b) {
-				return a - b;
-			}
-			function  multiple (a, b) {
-				return a * b;
-			}
-			
-			function printVal (value) {
-				console.log(value);
-			}
-			
-			console.log(sum(x, k));
-			console.log(divide(x, k));
-			console.log(minus(x, k));
-			console.log(multiple(x, k));
-		</script>
 	</head>
 	<body>
 		<table border="1">
 		<tr>
 			<td colspan="4">
-				<input>
+				<input type="text" id="calcInput">
 			</td>
 		</tr>
 		<tr>
 			<td><button onclick="printVal(1)">1</button></td>
 			<td><button onclick="printVal(2)">2</button></td>
 			<td><button onclick="printVal(3)">3</button></td>
-			<td><button o>-</button></td>
+			<td><button onclick="doSome('-')">-</button></td>
 		</tr>
 		<tr>
 			<td><button  onclick="printVal(4)">4</button></td>
 			<td><button onclick="printVal(5)">5</button></td>
 			<td><button onclick="printVal(6)">6</button></td>
-			<td><button>*</button></td>
+			<td><button onclick="doSome('*')">*</button></td>
 		</tr>
 		<tr>
 			<td><button onclick="printVal(7)">7</button></td>
 			<td><button onclick="printVal(8)">8</button></td>
 			<td><button onclick="printVal(9)">9</button></td>
-			<td><button>/</button></td>
+			<td><button onclick="doSome('/')">/</button></td>
 		</tr>
 		<tr>
-			<td><button onclick="printVal(1)">0</button></td>
-			<td><button>.</button></td>
-			<td><button>=</button></td>
-			<td><button>+</button></td>
+			<td><button onclick="printVal(0)">0</button></td>
+			<td><button onclick="printVal('.')">.</button></td>
+			<td><button onclick="calc('=')">=</button></td>
+			<td><button onclick="doSome('+')">+</button></td>
 		</tr>
 		</table>
+		<script>
+			var x = 0, k = 0, n = '+';
+		
+			function  doSome (value) {
+				x = document.getElementById('calcInput').value;
+				n = value;
+				document.getElementById('calcInput').value = '';
+			};
+			
+			function printVal (value) {
+				document.getElementById('calcInput').value += value;
+			};
+			
+			function calc ()  {
+				var result = 0;
+				
+				x = parseFloat(x);
+				k = parseFloat(document.getElementById('calcInput').value);
+				
+				if (n == '*') {
+					result = x * k;	
+				}
+				if (n == '/') {
+					if (k == 0)  {
+						alert('На ноль делить нельзя ')
+					} else {
+						result = x / k;
+					};
+					
+				}
+				if (n == '+') {
+					result = x + k;		
+				}
+				if (n == '-') {
+					result = x - k;		
+				}
+				
+				document.getElementById('calcInput').value = result;
+			}
+		</script>
 	</body>
 </html>
